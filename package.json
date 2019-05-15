@@ -1,0 +1,16 @@
+{
+  "name": "@notores/invoice",
+  "main": "index.js",
+  "authors": [
+    "Renzo Roso <renzo@geex.company>",
+    "Kevin Sijbers <k.sijbers@gmail.com>"
+  ],
+  "version": "0.1.0",
+  "peerDependencies": {
+    "mongoose": "^5.4.11",
+    "@notores/core": "^0.2.0"
+  },
+  "devDependencies": {
+    "mongoose": "^5.4.11"
+  }
+}
