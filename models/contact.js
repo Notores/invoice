@@ -1,6 +1,5 @@
 const {MongoSchema, getModule} = require('@notores/core');
 const SharedModels = getModule('@notores/shared-models');
-const Address = SharedModels.models.Address;
 
 const netherlandsTerms = ['the netherlands', 'netherlands'];
 
@@ -8,7 +7,7 @@ const Contact = new MongoSchema('Contact', {
     company: {type: String, required: false},
     firstName: {type: String, required: false},
     lastName: {type: String, required: false},
-    address: {type: Address.schema, required: true},
+    address: {type: MongoSchema.Types.ObjectId, ref: 'Address', required: true},
     vatNumber: {type: String, required: false},
     chamberOfCommerceNumber: {type: String, required: false}
 }, {
