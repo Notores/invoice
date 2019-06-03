@@ -4,30 +4,38 @@ class InvoiceRouter {
         return require('./model');
     }
 
+    static getInvoiceModel() {
+        return InvoiceRouter.getModels().Invoice.model;
+    }
+
+    static getContactModel() {
+        return InvoiceRouter.getModels().Contact.model;
+    }
+
     static async get(req, res, next) {
-        const invoice = InvoiceRouter.getModels().Invoice;
-        const result = invoice
+        const Invoice = InvoiceRouter.getInvoiceModel();
+        const result = Invoice
             .find()
             .exec();
-        res.locals.setBody({invoices: result});
+        res.locals.setBody({invoice: result});
         next('route');
     }
 
     static async getById(req, res, next) {
-        const invoice = InvoiceRouter.getModels().Invoice;
-        const result = invoice
-            .findOne({_id: req.params.id})
+        const Invoice = InvoiceRouter.getInvoiceModel();
+        const result = Invoice
+            .findById(req.params.id)
             .exec();
-        res.locals.setBody({invoices: result});
+        res.locals.setBody({invoice: result});
         next('route');
     }
 
     static async getByInvoiceNo(req, res, next) {
-        const invoice = InvoiceRouter.getModels().Invoice;
-        const result = invoice
-            .findOne({_id: req.params.invoiceNo})
+        const Invoice = InvoiceRouter.getInvoiceModel();
+        const result = Invoice
+            .findOne({invoiceNo: req.params.invoiceNo})
             .exec();
-        res.locals.setBody({invoices: result});
+        res.locals.setBody({invoice: result});
         next('route');
     }
 

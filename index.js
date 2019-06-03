@@ -1,17 +1,19 @@
 const {NotoresModule} = require('@notores/core');
+
 class InvoiceModule extends NotoresModule {
     
-    constructor(){
-        super();
-        const models = require('./model');
-        this.setModel(models.Contact.modelName, models.Contact);
-        this.setModel(models.Invoice.modelName, models.Invoice);
-        models.Contact.loadModel();
-        models.Invoice.loadModel();
-    }
-
     init(){
-        require('./routes')();
+        super.init();
+
+        const {Contact, Invoice}= require('./model');
+
+        this.setModel(Contact.modelName, Contact);
+        this.setModel(Invoice.modelName, Invoice);
+
+        Contact.loadModel();
+        Invoice.loadModel();
+
+        require('./routes');
     }
 }
 

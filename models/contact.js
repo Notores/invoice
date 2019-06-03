@@ -1,11 +1,10 @@
 const {MongoSchema, getModule} = require('@notores/core');
-const {Schema} = require('mongoose');
 const SharedModels = getModule('@notores/shared-models');
 const Address = SharedModels.models.Address;
 
 const netherlandsTerms = ['the netherlands', 'netherlands'];
 
-const contactSchema = new Schema({
+const Contact = new MongoSchema('Contact', {
     company: {type: String, required: false},
     firstName: {type: String, required: false},
     lastName: {type: String, required: false},
@@ -18,7 +17,7 @@ const contactSchema = new Schema({
     timestamps: {createdAt: 'createdAt', updatedAt: 'updatedAt'}
 });
 
-contactSchema.pre('validate', function(next) {
+Contact.pre('validate', function(next) {
     const client = this;
 
     const hasName = client.company || client.lastName;
@@ -34,6 +33,5 @@ contactSchema.pre('validate', function(next) {
     return next();
 });
 
-const Contact = new MongoSchema('Contact', contactSchema);
 
 module.exports = Contact;
